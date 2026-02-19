@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guinée Web - Réseau Social Culturel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h2>🇬🇳 Guinée Web</h2>
+            </div>
+            <div class="nav-search">
+                <input type="text" placeholder="Rechercher des amis, contenus..." id="searchInput">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="nav-icons">
+                <button class="nav-btn" onclick="showSection('home')"><i class="fas fa-home"></i></button>
+                <button class="nav-btn" onclick="showSection('shorts')"><i class="fas fa-play"></i></button>
+                <button class="nav-btn" onclick="showSection('messages')"><i class="fas fa-comment"></i></button>
+                <button class="nav-btn" onclick="showSection('news')"><i class="fas fa-newspaper"></i></button>
+                <button class="nav-btn" onclick="showSection('profile')"><i class="fas fa-user"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile-card">
+                <img src="https://via.placeholder.com/60" alt="Profile" class="profile-pic">
+                <div class="user-info">
+                    <h4 id="currentUsername">Amadou Diallo</h4>
+                    <p>Conakry, Guinée</p>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" onclick="showSection('home')"><i class="fas fa-home"></i> Accueil</a>
+                <a href="#" onclick="showSection('profile')"><i class="fas fa-user"></i> Profil</a>
+                <a href="#" onclick="showSection('shorts')"><i class="fas fa-play"></i> Shorts</a>
+                <a href="#" onclick="showSection('messages')"><i class="fas fa-comment"></i> Messages</a>
+                <a href="#" onclick="showSection('news')"><i class="fas fa-newspaper"></i> Actualités</a>
+                <a href="#"><i class="fas fa-users"></i> Amis</a>
+                <a href="#"><i class="fas fa-calendar"></i> Événements</a>
+            </nav>
+
+            <div class="cultural-section">
+                <h4>🎭 Culture Guinéenne</h4>
+                <div class="cultural-links">
+                    <a href="#"><i class="fas fa-music"></i> Musique</a>
+                    <a href="#"><i class="fas fa-utensils"></i> Cuisine</a>
+                    <a href="#"><i class="fas fa-palette"></i> Art</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="content-section active">
+                <!-- Post Creator -->
+                <div class="post-creator">
+                    <div class="post-creator-header">
+                        <img src="https://via.placeholder.com/50" alt="Profile" class="profile-pic-small">
+                        <input type="text" placeholder="Quoi de neuf en Guinée?" id="postInput">
+                    </div>
+                    <div class="post-creator-actions">
+                        <button class="post-btn" onclick="toggleMediaUpload()"><i class="fas fa-image"></i> Photo/Vidéo</button>
+                        <button class="post-btn"><i class="fas fa-map-marker-alt"></i> Localisation</button>
+                        <button class="post-btn publish-btn" onclick="createPost()">Publier</button>
+                    </div>
+                    <div class="media-upload" id="mediaUpload" style="display:none;">
+                        <input type="file" id="mediaFile" accept="image/*,video/*">
+                    </div>
+                </div>
+
+                <!-- Stories -->
+                <div class="stories-container">
+                    <h3>Stories Culturelles</h3>
+                    <div class="stories">
+                        <div class="story">
+                            <img src="https://via.placeholder.com/80" alt="Story">
+                            <span>Festival</span>
+                        </div>
+                        <div class="story">
+                            <img src="https://via.placeholder.com/80" alt="Story">
+                            <span>Djembé</span>
+                        </div>
+                        <div class="story">
+                            <img src="https://via.placeholder.com/80" alt="Story">
+                            <span>Cuisine</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Posts Feed -->
+                <div class="posts-feed" id="postsFeed">
+                    <!-- Posts will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Shorts Section -->
+            <section id="shorts" class="content-section">
+                <h2>🎬 Shorts Guinéens</h2>
+                <div class="shorts-container">
+                    <div class="short-video">
+                        <video controls>
+                            <source src="sample-video.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas les vidéos.
+                        </video>
+                        <div class="short-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i> 124</button>
+                            <button class="action-btn"><i class="fas fa-comment"></i> 23</button>
+                            <button class="action-btn"><i class="fas fa-share"></i> 12</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages" class="content-section">
+                <div class="messages-container">
+                    <div class="messages-sidebar">
+                        <h3>Messages</h3>
+                        <div class="conversations">
+                            <div class="conversation active" onclick="openChat('Fatoumata')">
+                                <img src="https://via.placeholder.com/50" alt="Profile">
+                                <div class="conv-info">
+                                    <h4>Fatoumata Camara</h4>
+                                    <p>Dernière connexion...</p>
+                                </div>
+                            </div>
+                            <div class="conversation" onclick="openChat('Ibrahim')">
+                                <img src="https://via.placeholder.com/50" alt="Profile">
+                                <div class="conv-info">
+                                    <h4>Ibrahim Konaté</h4>
+                                    <p>Salut comment ça va?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-area">
+                        <div class="chat-header">
+                            <img src="https://via.placeholder.com/40" alt="Profile">
+                            <h4 id="chatWith">Fatoumata Camara</h4>
+                        </div>
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message received">Salut! Comment tu vas?</div>
+                            <div class="message sent">Ça va bien merci! Et toi?</div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" placeholder="Tapez votre message..." id="messageInput">
+                            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News Section -->
+            <section id="news" class="content-section">
+                <h2>📰 Actualités Guinée</h2>
+                <div class="live-badge">🔴 EN DIRECT</div>
+                
+                <div class="news-feed">
+                    <article class="news-item">
+                        <img src="https://via.placeholder.com/300x200" alt="News">
+                        <div class="news-content">
+                            <h3>Festival National de Musique</h3>
+                            <p>Le grand festival annuel de musique traditionnelle guinéenne commence demain à Conakry...</p>
+                            <small>Il y a 2 heures</small>
+                        </div>
+                    </article>
+                    
+                    <article class="news-item">
+                        <img src="https://via.placeholder.com/300x200" alt="News">
+                        <div class="news-content">
+                            <h3>Nouvelle Route Conakry-Kankan</h3>
+                            <p>Les travaux de la nouvelle autoroute sont terminés à 80%...</p>
+                            <small>Il y a 4 heures</small>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="content-section">
+                <div class="profile-header">
+                    <img src="https://via.placeholder.com/150" alt="Profile" class="profile-pic-large">
+                    <div class="profile-info">
+                        <h2>Amadou Diallo</h2>
+                        <p>Développeur & Passionné de Culture Guinéenne</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Conakry, Guinée</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <strong>156</strong>
+                                <span>Publications</span>
+                            </div>
+                            <div class="stat">
+                                <strong>2.3K</strong>
+                                <span>Abonnés</span>
+                            </div>
+                            <div class="stat">
+                                <strong>456</strong>
+                                <span>Abonnements</span>
+                            </div>
+                        </div>
+                        <button class="edit-profile-btn">Modifier le profil</button>
+                    </div>
+                </div>
+                
+                <div class="profile-posts">
+                    <h3>Mes Publications</h3>
+                    <div class="posts-grid">
+                        <div class="post-thumbnail">
+                            <img src="https://via.placeholder.com/200" alt="Post">
+                        </div>
+                        <div class="post-thumbnail">
+                            <img src="https://via.placeholder.com/200" alt="Post">
+                        </div>
+                        <div class="post-thumbnail">
+                            <img src="https://via.placeholder.com/200" alt="Post">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <div class="suggestions">
+                <h4>Suggestions d'amis</h4>
+                <div class="suggestion">
+                    <img src="https://via.placeholder.com/50" alt="Profile">
+                    <div class="suggestion-info">
+                        <h5>Mariama Bah</h5>
+                        <small>Kankan, Guinée</small>
+                        <button class="follow-btn">Suivre</button>
+                    </div>
+                </div>
+                <div class="suggestion">
+                    <img src="https://via.placeholder.com/50" alt="Profile">
+                    <div class="suggestion-info">
+                        <h5>Sékou Touré</h5>
+                        <small>Labé, Guinée</small>
+                        <button class="follow-btn">Suivre</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trending">
+                <h4>Tendances en Guinée</h4>
+                <div class="trend-item">
+                    <h5>#FestivalGuinée</h5>
+                    <small>2.3K publications</small>
+                </div>
+                <div class="trend-item">
+                    <h5>#CultureMandingue</h5>
+                    <small>1.8K publications</small>
+                </div>
+                <div class="trend-item">
+                    <h5>#ConakryCity</h5>
+                    <small>956 publications</small>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
